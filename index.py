@@ -4,6 +4,8 @@ EASY = 10
 MEDIUM = 50
 HARD = 100
 
+count = 1   
+
 
 def exit_check(input_text):
     return input_text.strip().lower() == "exit"
@@ -38,12 +40,14 @@ def select_difficulty():
 
 
 def start_game(n):
+    global count
+    count = 1
     random_number = random.randint(1, n)
     guess(random_number)
 
 
 def end_game():
-    input_text = input("You won! Press enter to restart the game")
+    input_text = input(f"You won! Number of attempts: {count}\nPress enter to restart the game")
 
     if exit_check(input_text):
         return
@@ -52,6 +56,7 @@ def end_game():
 
 
 def guess(random_n):
+    global count
     while True:
         input_text = input("Guess the number: ")
 
@@ -70,9 +75,11 @@ def guess(random_n):
 
         elif number > random_n:
             print("Less")
+            count += 1
 
         else:
             print("More")
+            count += 1
 
 
 input(
